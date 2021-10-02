@@ -1,24 +1,40 @@
-import logo from './logo.svg';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import React, { useState } from 'react';
 import './App.css';
+import Header from './components/Header/Header';
+import Menu from './components/Menu/Menu';
+import Home from './components/Home/Home';
+import Login from './components/Login/Login';
 
 function App() {
+
+  const [menuOpen, setMenuOpen] = useState(false)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+    <Router>
+      <div className="app">
+      <Switch>
+          <Route exact path='/'>
+              <Header 
+              menuOpen={menuOpen} 
+              setMenuOpen={setMenuOpen}/>
+              {menuOpen && <Menu />}
+
+              <Home />
+          </Route>
+          <Route exact path='/login'>
+                <Login />
+          </Route>
+      
+      </Switch>
+
     </div>
+
+
+
+    </Router>
+    
   );
 }
 
